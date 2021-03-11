@@ -1,7 +1,6 @@
 # furimaデータベース設計
-
-
 ## usersテーブル
+
 | Column                | Type    | Options                   |
 | --------------------- | ------- | ------------------------  |
 | nick_name             | string  | null: false               |
@@ -26,10 +25,10 @@
 | item_name              | string     | null: false                     |
 | item_info              | text       | null: false                     |
 | category_id            | integer    | null: false                     |
-| sales-status_id        | integer    | null: false                     |
-| shipping-fee-status_id | integer    | null: false                     |
+| sales_status_id        | integer    | null: false                     |
+| shipping_fee-status_id | integer    | null: false                     |
 | prefecture_id          | integer    | null: false                     |
-| scheduled-delivery_id  | integer    | null: false                     |
+| scheduled_delivery_id  | integer    | null: false                     |
 | item_price             | integer    | null: false                     |
 | user                   | references | null: false, foreign_key: true  |
 
@@ -50,7 +49,8 @@
 
 - belongs_to :user
 - belongs_to :item
-- has_one    :shipping-address
+- has_one    :shipping_address
+
 
 ## shipping_addresses
 
