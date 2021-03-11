@@ -1,4 +1,5 @@
 # furimaデータベース設計
+
 ## usersテーブル
 
 | Column                | Type    | Options                   |
