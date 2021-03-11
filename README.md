@@ -54,15 +54,15 @@
 
 ## shipping_addresses
 
-| Column       | Type       | Options                        |
-| ------------ | ---------- | ------------------------------ |
-| postal_code  | string     | null: false                    |
-| prefecture   | string     | null: false                    |
-| city         | string     | null: false                    |
-| addresses    | string     | null: false                    | 
-| building     | string     |                                | 
-| phone_number | string     | null: false                    |
-| buy_item     | references | null: false, foreign_key: true |
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| postal_code   | string     | null: false                    |
+| prefecture_id | integer    | null: false                    |
+| city          | string     | null: false                    |
+| addresses     | string     | null: false                    | 
+| building      | string     |                                | 
+| phone_number  | string     | null: false                    |
+| buy_item      | references | null: false, foreign_key: true |
 
 ### Association
 
