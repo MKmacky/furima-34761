@@ -3,6 +3,8 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one    :buy_item
   has_one_attached :image
+  include ActiveHash::Associations
+  has_many :articles
 
   with_options presence: true do
     validates :item_name
