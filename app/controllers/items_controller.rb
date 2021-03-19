@@ -1,5 +1,4 @@
 class ItemsController < ApplicationController
-
   before_action :authenticate_user!, only: [:new, :create, :edit, :update]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
@@ -39,7 +38,7 @@ class ItemsController < ApplicationController
     @item.destroy
     redirect_to root_path
   end
-  
+
   private
 
   def item_params
@@ -52,9 +51,6 @@ class ItemsController < ApplicationController
   end
 
   def correct_user
-    unless current_user.id == @item.user_id
-      redirect_to root_path
-    end
+    redirect_to root_path unless current_user.id == @item.user_id
   end
-  
 end

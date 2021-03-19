@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_12_103222) do
+ActiveRecord::Schema.define(version: 2021_03_18_020214) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -38,6 +38,15 @@ ActiveRecord::Schema.define(version: 2021_03_12_103222) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "buy_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "item_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_buy_items_on_item_id"
+    t.index ["user_id"], name: "index_buy_items_on_user_id"
+  end
+
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "item_name", null: false
     t.text "item_info", null: false
@@ -51,6 +60,19 @@ ActiveRecord::Schema.define(version: 2021_03_12_103222) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_items_on_user_id"
+  end
+
+  create_table "shipping_addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "postal_code", null: false
+    t.integer "prefecture_id", null: false
+    t.string "city", null: false
+    t.string "addresses", null: false
+    t.string "building"
+    t.string "phone_number", null: false
+    t.bigint "buy_item_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["buy_item_id"], name: "index_shipping_addresses_on_buy_item_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -72,5 +94,8 @@ ActiveRecord::Schema.define(version: 2021_03_12_103222) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "buy_items", "items"
+  add_foreign_key "buy_items", "users"
   add_foreign_key "items", "users"
+  add_foreign_key "shipping_addresses", "buy_items"
 end
