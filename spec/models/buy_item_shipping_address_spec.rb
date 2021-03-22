@@ -10,7 +10,6 @@ RSpec.describe BuyItemShippingAddress, type: :model do
       @shipping_address = FactoryBot.build(:buy_item_shipping_address, user_id: user.id, item_id: item.id)
     end
   
-  
   context '購入ができるとき' do
     
     it 'すべての値が正しく入力されていれば購入できる' do
@@ -74,7 +73,30 @@ RSpec.describe BuyItemShippingAddress, type: :model do
       @shipping_address.valid?
       expect(@shipping_address.errors.full_messages).to include("Phone number is invalid")
     end
-    
+
+    it 'phone_numberが数字のみでなければ保存できない' do
+      @shipping_address.phone_number = '090asdf4576'
+      @shipping_address.valid?
+      expect(@shipping_address.errors.full_messages).to include("Phone number is invalid")
+    end
+
+    it 'tokenが空では保存できないこと' do
+      @shipping_address.token = ''
+      @shipping_address.valid?
+      expect(@shipping_address.errors.full_messages).to include("Token can't be blank")
+    end
+
+    it 'user_idが空では保存できないこと' do
+      @shipping_address.user_id = ''
+      @shipping_address.valid?
+      expect(@shipping_address.errors.full_messages).to include("User can't be blank")
+    end
+
+    it 'item_idが空では保存できないこと' do
+      @shipping_address.item_id = ''
+      @shipping_address.valid?
+      expect(@shipping_address.errors.full_messages).to include("Item can't be blank")
+    end
   end
   end
 end

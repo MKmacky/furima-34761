@@ -2,7 +2,6 @@ class BuyItemsController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
   before_action :set_item_id, only: [:index, :create]
   before_action :redirect_root, only: [:index, :create]
-  before_action :item_buy_item, only: [:index, :create]
 
   def index
     @buy_item_shipping_address = BuyItemShippingAddress.new
@@ -41,11 +40,7 @@ class BuyItemsController < ApplicationController
   end
 
   def redirect_root
-    redirect_to root_path if current_user.id == @item.user_id
-  end
-
-  def item_buy_item
-    redirect_to root_path if @item.buy_item
+    redirect_to root_path if current_user.id == @item.user_id || @item.buy_item
   end
 
 end
