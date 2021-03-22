@@ -7,5 +7,5 @@ window.addEventListener('load', () => {
 
     const profitNumber = document.getElementById("profit")
     profitNumber.innerHTML = (Math.floor(inputValue - addTaxDom.innerHTML));
-  })
+  });
 });
