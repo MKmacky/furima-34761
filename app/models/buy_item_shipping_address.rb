@@ -16,6 +16,6 @@ class BuyItemShippingAddress
   def save
     buy_item = BuyItem.create(user_id: user_id, item_id: item_id)
     ShippingAddress.create(postal_code: postal_code, prefecture_id: prefecture_id, city: city, addresses: addresses,
-                           building: building, phone_number: phone_number, buy_item_id: buy_item_id)
+                           building: building, phone_number: phone_number, buy_item: buy_item)
   end
 end
