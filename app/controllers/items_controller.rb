@@ -40,6 +40,13 @@ class ItemsController < ApplicationController
     redirect_to root_path
   end
 
+  def search
+    return nil if params[:keyword] == ""
+    item = Item.where(['name LIKE ?', "%#{params[:keyword]}%"] )
+    render json:{ keyword: item }
+  end
+
+
   private
 
   def item_params
