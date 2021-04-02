@@ -18,9 +18,15 @@ class ItemsController < ApplicationController
     else
       render :new
     end
+    @message = Message.new(text: params[:message][:text])
+    if @message.save
+      ActionCable.server.broadcast 'message_channel', content: @message
+    end
   end
 
   def show
+    @message = Message.new
+    @messages = @item.messages
   end
 
   def edit
@@ -40,11 +46,18 @@ class ItemsController < ApplicationController
     redirect_to root_path
   end
 
+  def search
+    return nil if params[:keyword] == ""
+    item = Item.where(['name LIKE ?', "%#{params[:keyword]}%"] )
+    render json:{ keyword: item }
+  end
+
+
   private
 
   def item_params
-    params.require(:item).permit(:item_name, :item_info, :item_price, :image, :category_id, :sales_status_id,
-                                 :shipping_fee_status_id, :prefecture_id, :scheduled_delivery_id).merge(user_id: current_user.id)
+    params.require(:item).permit(:item_name, :item_info, :item_price, :category_id, :sales_status_id,
+                                 :shipping_fee_status_id, :prefecture_id, :scheduled_delivery_id, images:[]).merge(user_id: current_user.id)
   end
 
   def set_item

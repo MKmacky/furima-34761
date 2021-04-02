@@ -1,7 +1,10 @@
 class Item < ApplicationRecord
   belongs_to :user
   has_one    :buy_item
-  has_one_attached :image
+  has_many_attached :images
+  has_many :item_tag_relations
+  has_many :tags, through: :item_tag_relations
+  has_many :messages
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
   belongs_to :sales_status
@@ -10,7 +13,7 @@ class Item < ApplicationRecord
   belongs_to :scheduled_delivery
 
   with_options presence: true do
-    validates :image
+    validates :images
     validates :item_name
     validates :item_info
     validates :item_price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }, format: { with: /\A[0-9]+\z/ }
@@ -22,4 +25,13 @@ class Item < ApplicationRecord
       validates :scheduled_delivery_id
     end
   end
+
+  def self.search(search)
+    if search != ""
+      Item.where('text LIKE(?)', "%#{search}%")
+    else
+      Item.all
+    end
+  end
+
 end
