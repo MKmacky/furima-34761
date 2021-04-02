@@ -163,6 +163,14 @@
   text-align: left;
 }
 
+.comments-warn {
+  padding: 10px;
+  font-size: 14px;
+  margin: 10px 0px;
+  text-align: justify;
+  border: 1px solid;
+}
+
 .comment-btn {
   line-height: 48px;
   background-color: #3CCACE;
@@ -173,6 +181,7 @@
   font-size: 18px;
   border-radius: 100px;
   margin-bottom: 2vh;
+  display: inline-block;
 }
 
 .comment-flag {

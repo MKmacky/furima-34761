@@ -18,9 +18,15 @@ class ItemsController < ApplicationController
     else
       render :new
     end
+    @message = Message.new(text: params[:message][:text])
+    if @message.save
+      ActionCable.server.broadcast 'message_channel', content: @message
+    end
   end
 
   def show
+    @message = Message.new
+    @messages = @item.messages
   end
 
   def edit
