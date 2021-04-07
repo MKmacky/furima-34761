@@ -168,7 +168,6 @@
   font-size: 14px;
   margin: 10px 0px;
   text-align: justify;
-  border: 1px solid;
 }
 
 .comment-btn {
@@ -191,6 +190,11 @@
 
 .comment-flag-icon {
   margin: 10px 5px 0 0;
+}
+
+.comment-form{
+  width: 40vw;
+  height: 50px;
 }
 
 .links {
